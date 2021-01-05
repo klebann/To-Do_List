@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1609882002 source:c:\users\jakub\documents\zut\programowanie c\to-do list\main.c
+	<stdio.h>
+	<stdlib.h>
+	"menu.h"
+
+1609882298 source:c:\users\jakub\documents\zut\programowanie c\to-do list\menu.c
+	"menu.h"
+
+1609881182 c:\users\jakub\documents\zut\programowanie c\to-do list\menu.h
+

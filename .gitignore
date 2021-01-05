@@ -7,3 +7,6 @@
 !*.c
 !LICENSE
 !.gitignore
+!*.cbp
+!*.depend
+!*.exe
