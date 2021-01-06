@@ -40,6 +40,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/menu.h" />
+		<Unit filename="src/task.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/task.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
