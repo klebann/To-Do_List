@@ -1,4 +1,19 @@
+/* 00 system includes */
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+/* 01 project includes */
 #include "menu.h"
+#include "task.h"
+
+void showMenu(){
+    showLogo();
+    showMenuOptions();
+
+    int choice = getChoice();
+    selectOption(choice);
+}
 
 void showLogo(){
     printf(
@@ -31,10 +46,105 @@ int getChoice(){
     return choice;
 }
 
-void showMenu(){
-    showLogo();
-    showMenuOptions();
-
-    int choice = getChoice();
-    printf("%i\n", choice);
+void selectOption(int option){
+    switch(option){
+    case 1:
+        addTask();
+        break;
+    case 2:
+        showList();
+        break;
+    case 3:
+        deleteTask();
+        break;
+    case 4:
+        editTask();
+        break;
+    case 5:
+        showStatistics();
+        break;
+    case 0:
+        exitMenu();
+        break;
+    default:
+        puts("Select option from 0-6 range");
+        break;
+    }
 }
+
+void exitMenu(){
+    clrScr();
+    printf(
+           "  ________________                                                    \n"
+           " < See            >                                                   \n"
+           "  ----------------                                                    \n"
+           " \\                             .       .                             \n"
+           "  \\                           / `.   .' \"                           \n"
+           "   \\                  .---.  <    > <    >  .---.                    \n"
+           "    \\                 |    \\  \\ - ~ ~ - /  /    |                  \n"
+           "          _____          ..-~             ~-..-~                      \n"
+           "         |     |   \\~~~\\.'                    `./~~~/               \n"
+           "        ---------   \\__/                        \\__/                \n"
+           "       .'  O    \\     /               /       \\  \"                 \n"
+           "      (_____,    `._.'               |         }  \\/~~~/             \n"
+           "       `----.          /       }     |        /    \\__/              \n"
+           "             `-.      |       /      |       /      `. ,~~|           \n"
+           "                 ~-.__|      /_ - ~ ^|      /- _      `..-'           \n"
+           "                      |     /        |     /     ~-.     `-. _  _  _  \n"
+           "                      |_____|        |_____|         ~ - . _ _ _ _ _> \n"
+    );
+
+    sleep(1);
+    clrScr();
+    printf(
+           "  ________________                                                    \n"
+           " < See you        >                                                   \n"
+           "  ----------------                                                    \n"
+           " \\                             .       .                             \n"
+           "  \\                           / `.   .' \"                           \n"
+           "   \\                  .---.  <    > <    >  .---.                    \n"
+           "    \\                 |    \\  \\ - ~ ~ - /  /    |                  \n"
+           "          _____          ..-~             ~-..-~                      \n"
+           "         |     |   \\~~~\\.'                    `./~~~/               \n"
+           "        ---------   \\__/                        \\__/                \n"
+           "       .'  O    \\     /               /       \\  \"                 \n"
+           "      (_____,    `._.'               |         }  \\/~~~/             \n"
+           "       `----.          /       }     |        /    \\__/              \n"
+           "             `-.      |       /      |       /      `. ,~~|           \n"
+           "                 ~-.__|      /_ - ~ ^|      /- _      `..-'           \n"
+           "                      |     /        |     /     ~-.     `-. _  _  _  \n"
+           "                      |_____|        |_____|         ~ - . _ _ _ _ _> \n"
+    );
+
+    sleep(1);
+    clrScr();
+    printf(
+           "  ________________                                                    \n"
+           " < See you later! >                                                   \n"
+           "  ----------------                                                    \n"
+           " \\                             .       .                             \n"
+           "  \\                           / `.   .' \"                           \n"
+           "   \\                  .---.  <    > <    >  .---.                    \n"
+           "    \\                 |    \\  \\ - ~ ~ - /  /    |                  \n"
+           "          _____          ..-~             ~-..-~                      \n"
+           "         |     |   \\~~~\\.'                    `./~~~/               \n"
+           "        ---------   \\__/                        \\__/                \n"
+           "       .'  O    \\     /               /       \\  \"                 \n"
+           "      (_____,    `._.'               |         }  \\/~~~/             \n"
+           "       `----.          /       }     |        /    \\__/              \n"
+           "             `-.      |       /      |       /      `. ,~~|           \n"
+           "                 ~-.__|      /_ - ~ ^|      /- _      `..-'           \n"
+           "                      |     /        |     /     ~-.     `-. _  _  _  \n"
+           "                      |_____|        |_____|         ~ - . _ _ _ _ _> \n"
+    );
+
+    sleep(1);
+    exit(EXIT_SUCCESS);
+}
+
+void clrScr()
+{
+    system("@cls||clear");
+}
+
+
