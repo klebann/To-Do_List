@@ -1,8 +1,18 @@
 #ifndef TASK_H_INCLUDED
 #define TASK_H_INCLUDED
 
+/* Task structure containing all needed variables */
+struct Task;
+
 /* Shows whole menu */
 void addTask();
+
+const char* getTitleFromUser();
+
+const char* getContentFromUser();
+
+/* Shows whole menu */
+struct Task getTaskFromUser();
 
 /* Shows whole menu */
 void showList();

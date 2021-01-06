@@ -28,3 +28,29 @@
 1609942120 source:c:\users\jakub\documents\zut\programowanie c\to-do list\src\task.c
 	"task.h"
 
+1609964846 source:/home/jkleban/git/To-Do_List/src/main.c
+	<stdio.h>
+	<stdlib.h>
+	"menu.h"
+
+1609964846 /home/jkleban/git/To-Do_List/src/menu.h
+
+1609964846 source:/home/jkleban/git/To-Do_List/src/menu.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"menu.h"
+	"task.h"
+
+1609972691 /home/jkleban/git/To-Do_List/src/task.h
+
+1609973961 source:/home/jkleban/git/To-Do_List/src/task.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"task.h"
+	"timestamp.h"
+
+1609973917 /home/jkleban/git/To-Do_List/src/timestamp.h
+
