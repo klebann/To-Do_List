@@ -7,9 +7,9 @@ struct Task;
 /* Shows whole menu */
 void addTask();
 
-const char* getTitleFromUser();
+void getTitleFromUser(char *title);
 
-const char* getContentFromUser();
+void getContentFromUser(char *content);
 
 /* Shows whole menu */
 struct Task getTaskFromUser();

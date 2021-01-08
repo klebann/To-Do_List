@@ -25,24 +25,20 @@ void addTask(){
 struct Task getTaskFromUser(){
     struct Task task;
     task.creation = (int)time(NULL);
-    task.title = getTitleFromUser();
-    task.content = getContentFromUser();
+    getTitleFromUser(task.title);
+    getContentFromUser(task.content);
 
     task.begin = getTimestampFromUser();
 }
 
-const char* getTitleFromUser(){
+void getTitleFromUser(char *title){
     printf("Title: ");
-    char *title;
     scanf("%s", title);
-    return title;
 }
 
-const char* getContentFromUser(){
+void getContentFromUser(char *content){
     printf("Content: ");
-    char *content;
     scanf("%s", content);
-    return content;
 }
 
 void showList(){

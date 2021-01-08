@@ -10,12 +10,13 @@
 time_t getTimestampFromUser(){
     printf("Date(YYYY.MM.DD HH:MM): ");
     char* date;
-    scanf("");
+    scanf("%s", date);
 
     time_t result = 0;
 
     int year = 0, month = 0, day = 0, hour = 0, min = 0;
 
+    // TODO: date must be (const char *) type
     if (sscanf(date, "%4d.%2d.%2d %2d:%2d", &year, &month, &day, &hour, &min) == 5) {
        struct tm breakdown = {0};
        breakdown.tm_year = year - 1900; /* years since 1900 */
