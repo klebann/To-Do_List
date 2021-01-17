@@ -72,14 +72,14 @@ int getLastId(){
 }
 
 void getTitleFromUser(char *title){
-
+    scanf("%*c"); //discard the newline (without it will be skipped)
     printf("Title: ");
-    scanf("%s", title);
+    scanf("%[^\n]%*c", title); //whole line
 }
 
 void getContentFromUser(char *content){
     printf("Content: ");
-    scanf("%s", content);
+    scanf("%[^\n]%*c", content);
 }
 
 void showList(){
