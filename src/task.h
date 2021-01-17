@@ -18,13 +18,22 @@ void getContentFromUser(char *content);
 /* Ask user for all component of task and return it */
 struct Task *getTaskFromUser();
 
+/* save task to file */
+void saveTask(struct Task *task);
+
+/* get new unique Id for task (based on last ID)*/
+int getNewId();
+
+/* get last saved ID from file */
+int getLastId();
+
 /* Show list of tasks */
 void showList();
 
-/* Delete task with id from parametr */
+/* Delete task with id from parameter */
 void deleteTask();
 
-/* Edit task with id from parametr */
+/* Edit task with id from parameter */
 void editTask();
 
 /* Show one task */

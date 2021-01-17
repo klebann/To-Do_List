@@ -25,7 +25,7 @@ void addTask(){
     struct Task *task = getTaskFromUser();
     showTask(task);
     if (confirmAdding()){
-        puts("Saving to file...");
+        saveTask(task);
     }
 }
 
@@ -34,7 +34,7 @@ struct Task *getTaskFromUser(){
     task->title = (char *) malloc(sizeof(char [TITLESIZE]));
     task->content = (char *) malloc(sizeof(char [CONTENTSIZE]));
 
-    task->id = 1; //TODO: from database
+    task->id = getNewId();
     task->creation = (int)time(NULL);
     getTitleFromUser(task->title);
     getContentFromUser(task->content);
@@ -43,6 +43,32 @@ struct Task *getTaskFromUser(){
     task->end = getTimestampFromUser("End ");
 
     return task;
+}
+
+void saveTask(struct Task *task){
+    FILE *fp;
+    fp = fopen("data/tasks.txt", "a+");
+    fprintf(fp, "%d;%s;%s;%lld;%lld;%lld\n", task->id, task->title, task->content, (long long)task->creation, (long long)task->begin, (long long)task->end);
+    fclose(fp);
+}
+
+int getNewId(){
+    return getLastId() + 1;
+}
+
+int getLastId(){
+    FILE *fp;
+    char line[255];
+    int lastId;
+
+    fp = fopen("data/tasks.txt", "r");
+    while (fgets(line, sizeof(line), fp) != NULL)
+    {
+        lastId = atoi(strtok(line, ";"));
+    }
+    fclose(fp);
+
+    return lastId;
 }
 
 void getTitleFromUser(char *title){
