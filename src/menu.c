@@ -8,11 +8,15 @@
 #include "task.h"
 
 void showMenu(){
-    showLogo();
-    showMenuOptions();
+    int choice;
+    do {
+        clrScr();
+        showLogo();
+        showMenuOptions();
 
-    int choice = getChoice();
-    selectOption(choice);
+        choice = getChoice();
+        selectOption(choice);
+    } while(choice != 0);
 }
 
 void showLogo(){
