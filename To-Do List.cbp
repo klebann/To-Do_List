@@ -33,6 +33,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="src/FileManager.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/FileManager.h" />
 		<Unit filename="src/main.c">
 			<Option compilerVar="CC" />
 		</Unit>

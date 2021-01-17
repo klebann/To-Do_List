@@ -8,6 +8,7 @@
 /* 01 project includes */
 #include "task.h"
 #include "timestamp.h"
+#include "FileManager.h"
 
 #define TITLESIZE 100
 #define CONTENTSIZE 100
@@ -45,30 +46,8 @@ struct Task *getTaskFromUser(){
     return task;
 }
 
-void saveTask(struct Task *task){
-    FILE *fp;
-    fp = fopen("data/tasks.txt", "a+");
-    fprintf(fp, "%d;%s;%s;%lld;%lld;%lld\n", task->id, task->title, task->content, (long long)task->creation, (long long)task->begin, (long long)task->end);
-    fclose(fp);
-}
-
 int getNewId(){
-    return getLastId() + 1;
-}
-
-int getLastId(){
-    FILE *fp;
-    char line[255];
-    int lastId;
-
-    fp = fopen("data/tasks.txt", "r");
-    while (fgets(line, sizeof(line), fp) != NULL)
-    {
-        lastId = atoi(strtok(line, ";"));
-    }
-    fclose(fp);
-
-    return lastId;
+    return getLastIdFromFile() + 1;
 }
 
 void getTitleFromUser(char *title){
@@ -80,6 +59,25 @@ void getTitleFromUser(char *title){
 void getContentFromUser(char *content){
     printf("Content: ");
     scanf("%[^\n]%*c", content);
+}
+
+bool confirmAdding(){
+    printf("Do you want to save it(y/n): ");
+    char answer[5];
+    scanf("%s",answer);
+    if (strcmp(answer, "y") == 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void saveTask(struct Task *task){
+    FILE *fp;
+    fp = fopen("data/tasks.txt", "a+");
+    fprintf(fp, "%d;%s;%s;%lld;%lld;%lld\n", task->id, task->title, task->content, (long long)task->creation, (long long)task->begin, (long long)task->end);
+    fclose(fp);
 }
 
 void showList(){
@@ -108,14 +106,4 @@ void showStatistics(){
 
 }
 
-bool confirmAdding(){
-    printf("Do you want to save it(y/n): ");
-    char answer[5];
-    scanf("%s",answer);
-    if (strcmp(answer, "y") == 0) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
+

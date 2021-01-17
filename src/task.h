@@ -18,17 +18,17 @@ void getContentFromUser(char *content);
 /* Ask user for all component of task and return it */
 struct Task *getTaskFromUser();
 
-/* save task to file */
-void saveTask(struct Task *task);
-
 /* get new unique Id for task (based on last ID)*/
 int getNewId();
 
-/* get last saved ID from file */
-int getLastId();
+/* ask user if he confirm data and if "y" then save task */
+bool confirmAdding();
+
+/* save task to file */
+void saveTask(struct Task *task);
 
 /* Show list of tasks */
-void showList();
+void showList(); //TODO (show tasks from file or smth like this)
 
 /* Delete task with id from parameter */
 void deleteTask();
@@ -41,7 +41,5 @@ void showTask(struct Task *task);
 
 /* Shows whole menu */
 void showStatistics();
-
-bool confirmAdding();
 
 #endif
