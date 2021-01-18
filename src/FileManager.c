@@ -11,8 +11,16 @@ int getLastIdFromFile(){
     FILE *fp;
     char line[255];
     int lastId = 0;
+    char filename[] = "data/tasks.txt";
 
-    fp = fopen("data/tasks.txt", "r");
+    fp = fopen(filename, "r");
+
+    if (fp == NULL)
+    {
+        printf("Nothing in %s\n", filename);
+        return 0;
+    }
+
     while (fgets(line, sizeof(line), fp) != NULL)
     {
         lastId = atoi(strtok(line, ";"));

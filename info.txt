@@ -1,0 +1,4 @@
+TODO:
+- free all pointers
+- edit task
+- delete task

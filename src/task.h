@@ -28,7 +28,13 @@ bool confirmAdding();
 void saveTask(struct Task *task);
 
 /* Show list of tasks */
-void showList(); //TODO (show tasks from file or smth like this)
+void showList();
+
+/* Returns list of tasks form file */
+void getTasksFromFile(struct Task *tasks);
+
+/* shows all tasks from task list */
+void showAllTasks(struct Task *tasks, int count);
 
 /* Delete task with id from parameter */
 void deleteTask();

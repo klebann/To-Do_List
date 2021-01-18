@@ -81,3 +81,49 @@
 	<time.h>
 	"FileManager.h"
 
+1611009455 source:c:\users\fengl\onedrive\dokumenty\zut\git\to-do_list\src\filemanager.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"FileManager.h"
+
+1611003701 c:\users\fengl\onedrive\dokumenty\zut\git\to-do_list\src\filemanager.h
+	"task.h"
+
+1611013994 c:\users\fengl\onedrive\dokumenty\zut\git\to-do_list\src\task.h
+	<stdbool.h>
+
+1611003701 source:c:\users\fengl\onedrive\dokumenty\zut\git\to-do_list\src\main.c
+	<stdio.h>
+	<stdlib.h>
+	"menu.h"
+
+1611003701 c:\users\fengl\onedrive\dokumenty\zut\git\to-do_list\src\menu.h
+
+1611003701 source:c:\users\fengl\onedrive\dokumenty\zut\git\to-do_list\src\menu.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"menu.h"
+	"task.h"
+
+1611003701 source:c:\users\fengl\onedrive\dokumenty\zut\git\to-do_list\src\timestamp.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"timestamp.h"
+
+1611003701 c:\users\fengl\onedrive\dokumenty\zut\git\to-do_list\src\timestamp.h
+
+1611013672 source:c:\users\fengl\onedrive\dokumenty\zut\git\to-do_list\src\task.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<stdbool.h>
+	"task.h"
+	"timestamp.h"
+	"FileManager.h"
+
