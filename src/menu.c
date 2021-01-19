@@ -148,7 +148,11 @@ void exitMenu(){
 
 void clrScr()
 {
-    system("@cls||clear");
+    system("clear || cls");
 }
 
+void makePause(){
+    printf("Press any key to continue...");
+    getchar(); getchar();
+}
 

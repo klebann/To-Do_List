@@ -22,4 +22,7 @@ void exitMenu();
 /* clear screen on Windows and Linux */
 void clrScr();
 
+/* print message and wait for input */
+void makePause();
+
 #endif
