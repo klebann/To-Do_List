@@ -50,20 +50,21 @@
 	"menu.h"
 	"task.h"
 
-1611405389 /home/jkleban/git/To-Do_List/src/task.h
+1611413764 /home/jkleban/git/To-Do_List/src/task.h
 	<stdbool.h>
 
-1611406450 source:/home/jkleban/git/To-Do_List/src/task.c
+1611419857 source:/home/jkleban/git/To-Do_List/src/task.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<time.h>
 	<stdbool.h>
+	<float.h>
 	"task.h"
 	"timestamp.h"
 	"FileManager.h"
 
-1611002119 /home/jkleban/git/To-Do_List/src/timestamp.h
+1611410641 /home/jkleban/git/To-Do_List/src/timestamp.h
 
 1610913203 c:\users\jakub\documents\zut\programowanie c\to-do list\src\timestamp.h
 
@@ -130,7 +131,7 @@
 	"timestamp.h"
 	"FileManager.h"
 
-1611002119 source:/home/jkleban/git/To-Do_List/src/timestamp.c
+1611419844 source:/home/jkleban/git/To-Do_List/src/timestamp.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

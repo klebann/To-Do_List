@@ -4,6 +4,7 @@
 #include <string.h>
 #include <time.h>
 #include <stdbool.h>
+#include <float.h>
 
 /* 01 project includes */
 #include "task.h"
@@ -389,7 +390,64 @@ void showTask(struct Task *task){
 }
 
 void showStatistics(){
+    //GET DATA
+    int taskCount = getLastIdFromFile();
+    struct Task **tasks = initTaskList(taskCount);
 
+    if (taskCount <= 0){
+        puts("There is no tasks!\n");
+        makePause();
+        return;
+    }
+
+    getTasksFromFile(tasks);
+
+    //SHOW STATISTICS
+    puts("\n==========STATISTICS==========");
+    printf("Number of tasks: %d\n", getLastIdFromFile());
+    printf("Longest task: %.0fs\n", getLongestTaskTime(tasks, taskCount));
+    printf("Shortest task: %.0fs\n", getShortestTaskTime(tasks, taskCount));
+    printf("Sum of all tasks duration: %.0fs\n", getSumOfAllTasksTime(tasks, taskCount));
+    printf("Average task duration: %.0fs\n", getAverageTaskTime(tasks, taskCount));
+
+    makePause();
 }
+
+double getLongestTaskTime(struct Task **tasks, int taskCount){
+    double longest = 0;
+    double timediff = 0;
+    for (int i=0; i<taskCount; i++){
+        timediff = difftime(tasks[i]->end, tasks[i]->begin);
+        if (timediff > longest)
+            longest = timediff;
+    }
+    return longest;
+}
+
+double getShortestTaskTime(struct Task **tasks, int taskCount){
+    double shortest = DBL_MAX;
+    double timediff = 0;
+    for (int i=0; i<taskCount; i++){
+        timediff = difftime(tasks[i]->end, tasks[i]->begin);
+        if (timediff < shortest)
+            shortest = timediff;
+    }
+    return shortest;
+}
+
+double getSumOfAllTasksTime(struct Task **tasks, int taskCount){
+    double sum = 0;
+    for (int i=0; i<taskCount; i++){
+        sum += difftime(tasks[i]->end, tasks[i]->begin);
+    }
+    return sum;
+}
+
+double getAverageTaskTime(struct Task **tasks, int taskCount){
+    double sum = getSumOfAllTasksTime(tasks, taskCount);
+    return sum / taskCount;
+}
+
+
 
 

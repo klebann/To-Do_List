@@ -69,4 +69,16 @@ void showTask(struct Task *task);
 /* Shows whole menu */
 void showStatistics();
 
+/* Get longest time diff from begin to end of tasks */
+double getLongestTaskTime(struct Task **tasks, int taskCount);
+
+/* Get shortest time diff from begin to end of tasks */
+double getShortestTaskTime(struct Task **tasks, int taskCount);
+
+/* Get sum of all task duration time */
+double getSumOfAllTasksTime(struct Task **tasks, int taskCount);
+
+/* Get average task duration time of all the tasks */
+double getAverageTaskTime(struct Task **tasks, int taskCount);
+
 #endif
