@@ -30,6 +30,9 @@ int getNewId();
 /* ask user if he confirm data and if "y" then save task */
 bool confirmAdding();
 
+/* ask user if he confirm showed task to be deleteed by typing "y" */
+bool confirmDeleting();
+
 /* save task to file */
 void saveTask(struct Task *task);
 

@@ -90,6 +90,18 @@ bool confirmAdding(){
     }
 }
 
+bool confirmDeleting(){
+    printf("Do you want to delete it(y/n): ");
+    char answer[5];
+    scanf("%s",answer);
+    if (strcmp(answer, "y") == 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 void saveTask(struct Task *task){
     FILE *fp;
     fp = fopen("data/tasks.txt", "a+");
@@ -146,12 +158,72 @@ void editTaskInFile(struct Task *task, int id){
     rename("replace.tmp", path);
 }
 
+void deleteTaskInFile(int id){
+    FILE * fPtr;
+    FILE * fTemp;
+    char path[] = "data/tasks.txt";
+    char buffer[BUFFER_SIZE];
+
+    /*  Open all required files */
+    fPtr  = fopen(path, "r");
+    fTemp = fopen("replace.tmp", "w");
+
+    /* fopen() return NULL if unable to open file in given mode. */
+    if (fPtr == NULL || fTemp == NULL)
+    {
+        /* Unable to open file hence exit */
+        printf("\nUnable to open file.\n");
+        printf("Please check whether file exists and you have read/write privilege.\n");
+        exit(EXIT_FAILURE);
+    }
+
+
+    /*
+     * Read line from source file and write to destination
+     * file after replacing given line.
+     */
+    int count = 0;
+    bool deleted = false;
+    while ((fgets(buffer, BUFFER_SIZE, fPtr)) != NULL)
+    {
+        count++;
+
+        /* If current id is line to replace */
+        if (count == id)
+            deleted = true;
+        else {
+            if (deleted) {
+                struct Task *task = initTask();
+                getTaskWithIdFromFile(task, count);
+                task->id--;
+                fprintf(fTemp, "%d;%s;%s;%lld;%lld;%lld\n", task->id, task->title, task->content, (long long)task->creation, (long long)task->begin, (long long)task->end );
+            }
+            else
+                fputs(buffer, fTemp);
+        }
+
+    }
+
+
+    /* Close all files to release resource */
+    fclose(fPtr);
+    fclose(fTemp);
+
+
+    /* Delete original source file */
+    remove(path);
+
+    /* Rename temporary file as original file */
+    rename("replace.tmp", path);
+}
+
 void showList(){
     int taskCount = getLastIdFromFile();
     struct Task **tasks = initTaskList(taskCount);
 
     if (taskCount <= 0){
-        puts("There is no tasks");
+        puts("There is no tasks!\n");
+        makePause();
         return;
     }
 
@@ -173,6 +245,7 @@ void getTasksFromFile(struct Task **tasks){
     if (fp == NULL)
     {
         printf("Could not open file %s", filename);
+        makePause();
         return;
     }
 
@@ -202,6 +275,7 @@ void getTaskWithIdFromFile(struct Task *task, int id){
 
     if (fp == NULL) {
         printf("Could not open file %s", filename);
+        makePause();
         return;
     }
 
@@ -233,11 +307,30 @@ void showAllTasks(struct Task **tasks, int count){
         showTask(tasks[i]);
         puts("-----------------------------");
     }
-    return;
 }
 
 void deleteTask(){
+    int id = getIdFromUser();
+    int lastId = getLastIdFromFile();
 
+    if (!isIdValid(id, lastId)) {
+        printf("Enter ID in range 1-%d\n", lastId);
+        makePause();
+        return;
+    }
+
+    struct Task *task = initTask();
+    getTaskWithIdFromFile(task, id);
+
+    puts("==========TO DELETE==========");
+    showTask(task);
+    puts("-----------------------------");
+
+    if (confirmDeleting()){
+        deleteTaskInFile(id);
+    }
+
+    makePause();
 }
 
 void editTask(){
@@ -246,6 +339,7 @@ void editTask(){
 
     if (!isIdValid(id, lastId)) {
         printf("Enter ID in range 1-%d\n", lastId);
+        makePause();
         return;
     }
 
