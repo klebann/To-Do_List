@@ -1,0 +1,7 @@
+*.c linguist-detectable=true
+*.html linguist-detectable=false
+*.tex linguist-detectable=false
+*.js linguist-detectable=false
+*.css linguist-detectable=false
+*.bat linguist-detectable=false
+Makefile linguist-detectable=false
