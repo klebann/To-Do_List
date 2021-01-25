@@ -2,4 +2,4 @@ TODO:
 + edit task
 + delete task
 + simplify code
-- free all pointers
++ free all pointers

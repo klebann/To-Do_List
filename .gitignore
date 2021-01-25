@@ -11,3 +11,15 @@
 !*.depend
 !*.exe
 !*.txt
+# DOCUMENTATION
+!*.html
+!*.js
+!*.svg
+!*.css
+!*.png
+# LATEX
+!*.tex
+!*.sty
+!*.bat
+!Makefile
+!Doxyfile
