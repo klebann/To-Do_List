@@ -15,6 +15,12 @@ struct Task *initTask();
 /* Create new tasks list and correctly allocate memory */
 struct Task **initTaskList(int size);
 
+/* correctly free task pointer and all components */
+void freeTask(struct Task *task);
+
+/* correctly free task list and all components */
+void freeTaskList(struct Task **tasks, int size);
+
 /* Ask user for title and save to variable */
 void getTitleFromUser(char *title);
 

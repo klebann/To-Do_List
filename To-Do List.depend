@@ -14,24 +14,25 @@
 	<stdlib.h>
 	"menu.h"
 
-1609942956 c:\users\jakub\documents\zut\programowanie c\to-do list\src\menu.h
+1611611896 c:\users\jakub\documents\zut\programowanie c\to-do list\src\menu.h
 
-1610914651 source:c:\users\jakub\documents\zut\programowanie c\to-do list\src\menu.c
+1611611896 source:c:\users\jakub\documents\zut\programowanie c\to-do list\src\menu.c
 	<stdio.h>
 	<stdlib.h>
 	<unistd.h>
 	"menu.h"
 	"task.h"
 
-1610921929 c:\users\jakub\documents\zut\programowanie c\to-do list\src\task.h
+1611612789 c:\users\jakub\documents\zut\programowanie c\to-do list\src\task.h
 	<stdbool.h>
 
-1610921859 source:c:\users\jakub\documents\zut\programowanie c\to-do list\src\task.c
+1611612722 source:c:\users\jakub\documents\zut\programowanie c\to-do list\src\task.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<time.h>
 	<stdbool.h>
+	<float.h>
 	"task.h"
 	"timestamp.h"
 	"FileManager.h"
@@ -78,7 +79,7 @@
 1610921868 c:\users\jakub\documents\zut\programowanie c\to-do list\src\filemanager.h
 	"task.h"
 
-1610921717 source:c:\users\jakub\documents\zut\programowanie c\to-do list\src\filemanager.c
+1611611896 source:c:\users\jakub\documents\zut\programowanie c\to-do list\src\filemanager.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

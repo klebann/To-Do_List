@@ -33,6 +33,8 @@ void addTask(){
     if (confirmAdding()){
         saveTask(task);
     }
+
+    freeTask(task);
 }
 
 struct Task *initTask(){
@@ -48,6 +50,19 @@ struct Task **initTaskList(int size){
         tasks[i] = initTask();
     }
     return tasks;
+}
+
+void freeTask(struct Task *task){
+    free(task->content);
+    free(task->title);
+    free(task);
+}
+
+void freeTaskList(struct Task **tasks, int size){
+    for (int i=0; i<size; i++){
+        free(tasks[i]);
+    }
+    free(tasks);
 }
 
 struct Task *getTaskFromUser(){
@@ -175,6 +190,7 @@ void deleteTaskInFile(int id){
         /* Unable to open file hence exit */
         printf("\nUnable to open file.\n");
         printf("Please check whether file exists and you have read/write privilege.\n");
+        makePause();
         exit(EXIT_FAILURE);
     }
 
@@ -198,6 +214,7 @@ void deleteTaskInFile(int id){
                 getTaskWithIdFromFile(task, count);
                 task->id--;
                 fprintf(fTemp, "%d;%s;%s;%lld;%lld;%lld\n", task->id, task->title, task->content, (long long)task->creation, (long long)task->begin, (long long)task->end );
+                freeTask(task);
             }
             else
                 fputs(buffer, fTemp);
@@ -232,6 +249,7 @@ void showList(){
 
     showAllTasks(tasks, taskCount);
 
+    freeTaskList(tasks, taskCount);
     makePause();
 }
 
@@ -331,6 +349,7 @@ void deleteTask(){
         deleteTaskInFile(id);
     }
 
+    deleteTask(task);
     makePause();
 }
 
@@ -363,6 +382,8 @@ void editTask(){
         editTaskInFile(newTask, id);
     }
 
+    freeTask(task);
+    freeTask(newTask);
     makePause();
 }
 
@@ -410,6 +431,7 @@ void showStatistics(){
     printf("Sum of all tasks duration: %.0fs\n", getSumOfAllTasksTime(tasks, taskCount));
     printf("Average task duration: %.0fs\n", getAverageTaskTime(tasks, taskCount));
 
+    freeTaskList(tasks, taskCount);
     makePause();
 }
 

@@ -1,5 +1,5 @@
 TODO:
 + edit task
++ delete task
++ simplify code
 - free all pointers
-- delete task
-- simplify code
