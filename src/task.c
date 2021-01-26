@@ -22,9 +22,7 @@ struct Task{
     unsigned id; /**< id of task */
     char *title; /**< title of task */
     char *content; /**< content of task */
-    time_t creation; /**< creation timestamp */
-    time_t begin; /**< task begin timestamp */
-    time_t end; /**< task end timestamp */
+    struct Timestamps *timestamps; /**< Timestamps structure with all timestamps */
 };
 
 void addTask(){
@@ -44,6 +42,7 @@ struct Task *initTask(){
     struct Task *task = (struct Task*) malloc(sizeof(struct Task));
     task->title = (char *) malloc(sizeof(char [TITLESIZE]));
     task->content = (char *) malloc(sizeof(char [CONTENTSIZE]));
+    task->timestamps = (struct Timestamps*) malloc(sizeof(struct Timestamps));
     return task;
 }
 
@@ -58,6 +57,7 @@ struct Task **initTaskList(int size){
 void freeTask(struct Task *task){
     free(task->content);
     free(task->title);
+    free(task->timestamps);
     free(task);
 }
 
@@ -72,12 +72,12 @@ struct Task *getTaskFromUser(){
     struct Task *task = initTask();
 
     task->id = getNewId();
-    task->creation = (int)time(NULL);
+    task->timestamps->creation = (int)time(NULL);
     getTitleFromUser(task->title);
     getContentFromUser(task->content);
 
-    task->begin = getTimestampFromUser("Begin ");
-    task->end = getTimestampFromUser("End ");
+    task->timestamps->begin = getTimestampFromUser("Begin ");
+    task->timestamps->end = getTimestampFromUser("End ");
 
     return task;
 }
@@ -124,7 +124,7 @@ bool confirmDeleting(){
 void saveTask(struct Task *task){
     FILE *fp;
     fp = fopen("data/tasks.txt", "a+");
-    fprintf(fp, "%d;%s;%s;%lld;%lld;%lld\n", task->id, task->title, task->content, (long long)task->creation, (long long)task->begin, (long long)task->end);
+    fprintf(fp, "%d;%s;%s;%lld;%lld;%lld\n", task->id, task->title, task->content, (long long)task->timestamps->creation, (long long)task->timestamps->begin, (long long)task->timestamps->end);
     fclose(fp);
 }
 
@@ -159,7 +159,7 @@ void editTaskInFile(struct Task *task, int id){
 
         /* If current id is line to replace */
         if (count == id)
-            fprintf(fTemp, "%d;%s;%s;%lld;%lld;%lld\n", task->id, task->title, task->content, (long long)task->creation, (long long)task->begin, (long long)task->end );
+            fprintf(fTemp, "%d;%s;%s;%lld;%lld;%lld\n", task->id, task->title, task->content, (long long)task->timestamps->creation, (long long)task->timestamps->begin, (long long)task->timestamps->end );
         else
             fputs(buffer, fTemp);
     }
@@ -216,7 +216,7 @@ void deleteTaskInFile(int id){
                 struct Task *task = initTask();
                 getTaskWithIdFromFile(task, count);
                 task->id--;
-                fprintf(fTemp, "%d;%s;%s;%lld;%lld;%lld\n", task->id, task->title, task->content, (long long)task->creation, (long long)task->begin, (long long)task->end );
+                fprintf(fTemp, "%d;%s;%s;%lld;%lld;%lld\n", task->id, task->title, task->content, (long long)task->timestamps->creation, (long long)task->timestamps->begin, (long long)task->timestamps->end );
                 freeTask(task);
             }
             else
@@ -277,9 +277,9 @@ void getTasksFromFile(struct Task **tasks){
         tasks[i]->id = atoi(strtok(line, ";"));
         strcpy(tasks[i]->title, strtok(NULL, ";"));
         strcpy(tasks[i]->content, (char *)strtok(NULL, ";"));
-        tasks[i]->creation = (time_t)atoll(strtok(NULL, ";"));
-        tasks[i]->begin = (time_t)atoll(strtok(NULL, ";"));
-        tasks[i]->end = (time_t)atoll(strtok(NULL, ";"));
+        tasks[i]->timestamps->creation = (time_t)atoll(strtok(NULL, ";"));
+        tasks[i]->timestamps->begin = (time_t)atoll(strtok(NULL, ";"));
+        tasks[i]->timestamps->end = (time_t)atoll(strtok(NULL, ";"));
         i++;
     }
     fclose(fp);
@@ -308,9 +308,9 @@ void getTaskWithIdFromFile(struct Task *task, int id){
             task->id = atoi(strtok(line, ";"));
             strcpy(task->title, strtok(NULL, ";"));
             strcpy(task->content, (char *)strtok(NULL, ";"));
-            task->creation = (time_t)atoll(strtok(NULL, ";"));
-            task->begin = (time_t)atoll(strtok(NULL, ";"));
-            task->end = (time_t)atoll(strtok(NULL, ";"));
+            task->timestamps->creation = (time_t)atoll(strtok(NULL, ";"));
+            task->timestamps->begin = (time_t)atoll(strtok(NULL, ";"));
+            task->timestamps->end = (time_t)atoll(strtok(NULL, ";"));
 
             found = true;
         }
@@ -352,7 +352,6 @@ void deleteTask(){
         deleteTaskInFile(id);
     }
 
-    deleteTask(task);
     makePause();
 }
 
@@ -408,9 +407,9 @@ void showTask(struct Task *task){
     printf("ID:\t\t%d\n", task->id);
     printf("Title:\t\t%s\n", task->title);
     printf("Content:\t%s\n", task->content);
-    printHumanReadableDate(task->creation, "Created at:\t");
-    printHumanReadableDate(task->begin, "Starts at:\t");
-    printHumanReadableDate(task->end, "Ends at:\t");
+    printHumanReadableDate(task->timestamps->creation, "Created at:\t");
+    printHumanReadableDate(task->timestamps->begin, "Starts at:\t");
+    printHumanReadableDate(task->timestamps->end, "Ends at:\t");
 }
 
 void showStatistics(){
@@ -442,7 +441,7 @@ double getLongestTaskTime(struct Task **tasks, int taskCount){
     double longest = 0;
     double timediff = 0;
     for (int i=0; i<taskCount; i++){
-        timediff = difftime(tasks[i]->end, tasks[i]->begin);
+        timediff = difftime(tasks[i]->timestamps->end, tasks[i]->timestamps->begin);
         if (timediff > longest)
             longest = timediff;
     }
@@ -453,7 +452,7 @@ double getShortestTaskTime(struct Task **tasks, int taskCount){
     double shortest = DBL_MAX;
     double timediff = 0;
     for (int i=0; i<taskCount; i++){
-        timediff = difftime(tasks[i]->end, tasks[i]->begin);
+        timediff = difftime(tasks[i]->timestamps->end, tasks[i]->timestamps->begin);
         if (timediff < shortest)
             shortest = timediff;
     }
@@ -463,7 +462,7 @@ double getShortestTaskTime(struct Task **tasks, int taskCount){
 double getSumOfAllTasksTime(struct Task **tasks, int taskCount){
     double sum = 0;
     for (int i=0; i<taskCount; i++){
-        sum += difftime(tasks[i]->end, tasks[i]->begin);
+        sum += difftime(tasks[i]->timestamps->end, tasks[i]->timestamps->begin);
     }
     return sum;
 }

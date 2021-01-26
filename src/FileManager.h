@@ -3,7 +3,9 @@
 
 #include "task.h"
 
-/* get last saved ID from file */
+/**
+ * get last saved ID from file
+ */
 int getLastIdFromFile();
 
 #endif

@@ -15,21 +15,27 @@ void addTask();
 
 /**
  * Create new Task and correctly allocate memory
+ * @return Initialized task pointer
  */
 struct Task *initTask();
 
 /**
  * Create new tasks list and correctly allocate memory
+ * @param size size of task list
+ * @return Initialized task list
  */
 struct Task **initTaskList(int size);
 
 /**
  * correctly free task pointer and all components
+ * @param task pointer to task
  */
 void freeTask(struct Task *task);
 
 /**
  * correctly free task list and all components
+ * @param tasks
+ * @return Initialized task list
  */
 void freeTaskList(struct Task **tasks, int size);
 

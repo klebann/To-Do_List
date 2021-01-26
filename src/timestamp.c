@@ -7,6 +7,8 @@
 /* 01 project includes */
 #include "timestamp.h"
 
+
+
 time_t getTimestampFromUser(char *message){
     /* concatenation */
     char buff[100];
