@@ -15,13 +15,16 @@
 #define CONTENTSIZE 100
 #define BUFFER_SIZE 300
 
+/**
+ * Task structure containing all needed variables
+ */
 struct Task{
-    unsigned id;
-    char *title;
-    char *content;
-    time_t creation;
-    time_t begin;
-    time_t end;
+    unsigned id; /**< id of task */
+    char *title; /**< title of task */
+    char *content; /**< content of task */
+    time_t creation; /**< creation timestamp */
+    time_t begin; /**< task begin timestamp */
+    time_t end; /**< task end timestamp */
 };
 
 void addTask(){
